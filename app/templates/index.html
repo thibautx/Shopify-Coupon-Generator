@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Coupons</title>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <form action="{{ url_for('api.generate_discount') }}" method="POST" role="form" class="form-horizontal">
+
+        <fieldset>
+        <legend>Generate Coupon Code</legend>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="prefix">Prefix</label>
+          <div class="col-md-4">
+          <input id="prefix" name="prefix" type="text" placeholder="(optional)" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="discount_type">Discount Type</label>
+          <div class="col-md-4">
+            <select id="discount_type" name="discount_type" class="form-control">
+              <option value="fixed_amount">Fixed Amount</option>
+              <option value="percentage">Percentage</option>
+              <option value="shipping">Shipping</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="value">Value</label>
+          <div class="col-md-4">
+          <input id="value" name="value" type="text" placeholder="(discount value)" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="value">Minimum Order Amount</label>
+          <div class="col-md-4">
+          <input id="minimum_order_amount" name="minimum_order_amount" type="text" placeholder="(optional)" class="form-control input-md" required="">
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="generate"></label>
+          <div class="col-md-4">
+            <button id="generate" type="submit" class="btn btn-primary">Generate Code</button>
+          </div>
+        </div>
+
+        </fieldset>
+    </form>
+
+    <div id="code_display" align="center">
+        {% if code is defined %}
+            <h2>Your generated code is:</h2>
+            <h3>{{ code }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
